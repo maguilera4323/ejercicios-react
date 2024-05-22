@@ -35,18 +35,34 @@ export default function CrudApp(){
     const [db, setDb] = useState(initialDb);
     const [dataToEdit, setDataToEdit] = useState(null);
 
-    const createData = (data) =>{}
+    const createData = (data) =>{
+        data.id = Date.now()
+        console.log(data)
+        setDb([...db,data])
+    }
 
-    const updateData = (data) =>{}
+    const updateData = (data) =>{
+        let newData = db.map(el=>el.id===data.id ? data : el)
+        setDb(newData)
+    }
 
-    const deleteData = (id) =>{}
+    const deleteData = (id) =>{
+        let isDelete = window.confirm('¿Estas seguro de eliminar el registro con el id '+id+'?')
+        if(isDelete){
+            let newData = db.filter(el=>el.id!==id)
+            setDb(newData)
+        }
+        console.log(id)     
+    }
 
     return(
         <>
             <h2>Crud App</h2>
-            <CrudForm createData= {createData} updateData={updateData} 
-            dataToEdit={dataToEdit} setDataToEdit={setDataToEdit}/>
-            <CrudTable data={db} setDataToEdit={setDataToEdit} deleteData= {createData}/>
+            <article className="grid-1-2">
+                <CrudForm createData= {createData} updateData={updateData} 
+                dataToEdit={dataToEdit} setDataToEdit={setDataToEdit}/>
+                <CrudTable data={db} setDataToEdit={setDataToEdit} deleteData= {deleteData}/>
+            </article>
         </>
     )
 }

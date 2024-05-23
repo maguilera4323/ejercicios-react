@@ -24,6 +24,11 @@
             "id":5,
             "name":"Ikki",
             "constellation":"Fénix"
+        },
+        {
+            "id":6,
+            "name":"Cat",
+            "constellation":"Felis"
         }
     ]
 }
